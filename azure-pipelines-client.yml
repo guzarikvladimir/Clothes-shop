@@ -6,6 +6,10 @@
 trigger:
 - main
 
+variables:
+  uiSource: '/client/src'
+  uiBuild: '$(uiSource)/build'
+
 pool:
   vmImage: ubuntu-latest
 
@@ -16,12 +20,8 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    pushd $(uiSource)
     npm install
     npm run build
+    popd
   displayName: 'npm install and build'
-  workingDirectory: ./client
-  
-- script: |
-    npm pack
-  displayName: 'Package for release'
-  workingDirectory: ./client
