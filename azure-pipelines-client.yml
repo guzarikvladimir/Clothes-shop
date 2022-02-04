@@ -24,3 +24,4 @@ steps:
 - script: |
     npm pack
   displayName: 'Package for release'
+  workingDirectory: ./client
