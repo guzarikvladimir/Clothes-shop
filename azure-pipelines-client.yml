@@ -21,3 +21,6 @@ steps:
   displayName: 'npm install and build'
   workingDirectory: ./client
   
+- script: |
+    npm pack
+  displayName: 'Package for release'
