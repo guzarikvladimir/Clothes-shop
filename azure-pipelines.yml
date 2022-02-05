@@ -1,34 +1,53 @@
-# Node.js
-# Build a general Node.js project with npm.
+# .NET Core
+# Build a general .NET Core project.
 # Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+# https://docs.microsoft.com/ru-ru/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive
 
 trigger:
-- none
+- master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  root: 'server/CShop/'
 
 steps:
-- bash: | # Grab the package version
-    v=`node -p "const p = require('./package.json'); p.version;"`
-    echo "##vso[task.setvariable variable=packageVersion]$v"
-    
-- task: CopyFiles@2
+- task: UseDotNet@2
   inputs:
-      contents: '*.tgz'
-      targetFolder: $(Build.ArtifactStagingDirectory)/npm
-  displayName: 'Copy archives to artifacts staging directory'
+    version: '5.0.x'
+    includePreviewVersions: true # Required for preview versions
 
-- task: CopyFiles@2
+- task: UseDotNet@2
+  displayName: 'Install .NET Core SDK'
   inputs:
-    sourceFolder: '$(Build.SourcesDirectory)'
-    contents: 'package.json' 
-    targetFolder: $(Build.ArtifactStagingDirectory)/npm
-  displayName: 'Copy package.json'
+    version: 5.0.x
+    performMultiLevelLookup: true
+    includePreviewVersions: true # Required for preview versions
 
-- task: PublishBuildArtifacts@1 
+- task: DotNetCoreCLI@2
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/npm'
-    artifactName: npm
-  displayName: 'Publish npm artifact'
+    command: 'restore'
+    feedsToUse: 'select'
+    vstsFeed: 'my-vsts-feed' # A series of numbers and letters
+    workingDirectory: $(root)
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    arguments: '--configuration $(buildConfiguration)'
+    workingDirectory: $(root)
+  displayName: 'dotnet build $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'myWebsiteName'
