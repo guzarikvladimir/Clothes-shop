@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/893df17b-4015-4271-844f-da84253b5ff5/resourceGroups/cshop-vguzarik-client-group/providers/Microsoft.Web/sites/cshop-vguzarik",
+    "appService.deploySubpath": "build"
+}
