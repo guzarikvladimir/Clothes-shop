@@ -6,6 +6,11 @@
 trigger:
 - main
 
+variables:
+  uiRoot: 'client'
+  uiSource: '$(uiRoot)/src'
+  uiBuild: '$(uiRoot)/build'
+
 pool:
   vmImage: ubuntu-latest
 
@@ -16,8 +21,22 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    pushd $(uiSource)
     npm install
     npm run build
+    popd
   displayName: 'npm install and build'
-  workingDirectory: ./client
-  
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(uiBuild)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
