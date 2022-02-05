@@ -12,7 +12,7 @@ variables:
   uiBuild: '$(uiRoot)/build'
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: widnows-latest
 
 steps:
 - task: NodeTool@0
