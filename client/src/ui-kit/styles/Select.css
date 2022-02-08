@@ -1,0 +1,51 @@
+.select {
+    width: 64px;
+    height: 152px;
+}
+
+.option-wrapper {
+    width: 24px;
+    height: 24px;
+    left: 20px;
+    top: 20px;
+    position: relative;
+}
+
+.option {
+    width: 18px;
+    height: 18px;
+    left: 3px;
+    top: 3px;
+
+    position: relative;
+    border-radius: 50px;
+    background: #FFFFFF;
+    border: 1px solid #121212;
+    box-sizing: border-box;
+}
+
+.option-inner {
+    width: 8px;
+    height: 8px;
+    left: 4px;
+    top: 4px;
+
+    position: relative;
+    border-radius: 50px;
+    box-sizing: border-box;
+}
+
+
+.option-inner-hover {
+    background: #121212;
+    border: 1px solid #121212;
+}
+
+.selected .option-inner {
+    background: #121212;
+    border: 1px solid #121212;
+}
+
+.inactive {
+    border: 1px solid #E6E6E6;
+}

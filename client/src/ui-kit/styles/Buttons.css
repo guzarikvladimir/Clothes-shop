@@ -1,0 +1,55 @@
+.button {
+    box-sizing: border-box;
+}
+
+.button-dark {
+    background: #121212;
+    border: 1px solid #121212;
+    box-sizing: border-box;
+    color: #FFFFFF;
+}
+
+.button-light {
+    background: #F8F8F8;
+    border: 2px solid #F8F8F8;
+    box-sizing: border-box;
+    color: #121212;
+}
+
+.button:hover {
+    background: #E6E6E6;
+    border: 1px solid #E6E6E6;
+    color: #121212;
+}
+
+.button:active {
+    background: #9C9C9C;
+    border: 1px solid #9C9C9C;
+    color: #FFFFFF;
+}
+
+.button-text {
+    font-family: Spartan;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    opacity: 0.9;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.button-small {
+    width: 154px;
+    height: 40px;
+}
+
+.button-large {
+    width: 340px;
+    height: 48px;
+}
+
+.button-outline {
+    width: 108px;
+    height: 32px;
+}
